@@ -1,0 +1,21 @@
+#lang pie
+
+'soup
+
+(claim +
+  (-> Nat Nat Nat))
+(define +
+  (lambda (a b)
+    (iter-Nat a b (lambda (x) (add1 x)))))
+
+(claim gauss-iter
+  (-> Nat Nat))
+(define gauss
+  (lambda (n)
+    (cdr
+      (iter-Nat n
+        (the (Pair Nat Nat) (cons 0 0))
+        (lambda (nprev)
+          (cons
+            (add1 (car nprev))
+            (+ (add1 (car nprev)) (cdr nprev))))))))
